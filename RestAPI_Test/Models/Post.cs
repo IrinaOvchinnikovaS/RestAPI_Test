@@ -6,12 +6,7 @@
 //
 //    var welcome = Welcome.FromJson(jsonString);
 
-using System;
-using System.Collections.Generic;
-
-using System.Globalization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Models
 {
@@ -32,24 +27,11 @@ namespace Models
 
     public partial class Post
     {
-        public static List<Post> FromJson(string json) => JsonConvert.DeserializeObject<List<Post>>(json, Converter.Settings);
+        public static List<Post> FromJson(string json) => JsonConvert.DeserializeObject<List<Post>>(json, Models.Converter.Settings);
     }
 
-    public static class Serialize
+    public static class SerializePosts
     {
-        public static string ToJson(this List<Post> self) => JsonConvert.SerializeObject(self, Converter.Settings);
-    }
-
-    internal static class Converter
-    {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-            },
-        };
+        public static string ToJson(this List<Post> self) => JsonConvert.SerializeObject(self, Models.Converter.Settings);
     }
 }
