@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Globalization;
 
-namespace Models
+namespace RestAPI_Test.Models
 {
     static class Converter
     {

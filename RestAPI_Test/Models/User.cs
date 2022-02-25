@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Models
+namespace RestAPI_Test.Models
 {
     public partial class User
     {
