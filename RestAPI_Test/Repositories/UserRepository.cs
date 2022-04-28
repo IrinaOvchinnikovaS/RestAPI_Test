@@ -8,7 +8,7 @@ namespace RestAPI_Test.Repositories
     {
         public async Task<List<User>> GetAllAsync()
         {
-            var stringJson = await GetAllFromSourceAsync("https://jsonplaceholder.typicode.com/users");
+            var stringJson = await GetAllFromSourceAsync("http://jsonplaceholder.typicode.com/users");
             List<User> users = User.FromJson(stringJson);
             return users;
         }

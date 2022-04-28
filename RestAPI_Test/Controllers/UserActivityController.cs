@@ -16,9 +16,15 @@ namespace RestAPI_Test.Controllers
         }
 
         [HttpGet]
-        public async void GetUserActivitySummaryAsync(int id)
+        public async Task<ContentResult> GetUserActivitySummaryAsync(int id)
         {
-            bool result = await _reportService.GetReportByUserIdAsync(id);
+            bool res = await _reportService.GetReportByUserIdAsync(id);
+            var result = new ContentResult
+            {
+                Content = res.ToString(),
+                ContentType = "application/json"
+            };
+            return result;
         }
     }
 }
