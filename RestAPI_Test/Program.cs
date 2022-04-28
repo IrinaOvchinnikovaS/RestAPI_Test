@@ -9,8 +9,7 @@ var services = builder.Services;
 
 builder.Services.AddControllers();
 
-services.AddScoped<IUsersService, UsersService>();
-services.AddScoped<ITodoService, TodoService>();
+services.AddScoped<IReportService, ReportService>();
 
 var app = builder.Build();
 

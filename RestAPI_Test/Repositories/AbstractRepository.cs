@@ -4,7 +4,7 @@
     {
         public async Task<string> GetAllFromSourceAsync(string url)
         {
-            string result;
+            string result = string.Empty;
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)

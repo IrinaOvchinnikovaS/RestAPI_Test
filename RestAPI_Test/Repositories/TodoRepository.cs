@@ -12,5 +12,11 @@ namespace RestAPI_Test.Repositories
             List<Todo> todos = Todo.FromJson(stringJson);
             return todos;
         }
+
+        public async Task<List<Todo>> GetByUserIdAsync(int id)
+        {
+            List<Todo> todos = await GetAllAsync();
+            return todos.Where(x => x.UserId == id).ToList();
+        }
     }
 }

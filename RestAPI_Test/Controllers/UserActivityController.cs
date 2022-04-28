@@ -7,18 +7,18 @@ namespace RestAPI_Test.Controllers
     {
         private readonly ILogger<UserActivityController> _logger;
 
-        private readonly IUsersService _usersService;
+        private readonly IReportService _reportService;
 
-        public UserActivityController(ILogger<UserActivityController> logger, IUsersService usersService)
+        public UserActivityController(ILogger<UserActivityController> logger, IReportService reportService)
         {
             _logger = logger;
-            _usersService = usersService;
+            _reportService = reportService;
         }
 
         [HttpGet]
         public async void GetUserActivitySummaryAsync(int id)
         {
-            await _usersService.GetActivitySummaryAsync(id);
+            bool result = await _reportService.GetReportByUserIdAsync(id);
         }
     }
 }
