@@ -3,6 +3,8 @@ using RestAPI_Test.Services.Interfaces;
 
 namespace RestAPI_Test.Controllers
 {
+    [ApiController]
+    [Produces("application/json")]
     [Route("[controller]")]
     public class UserActivityController : Controller
     {
@@ -20,15 +22,10 @@ namespace RestAPI_Test.Controllers
         /// Forming report by user id
         /// </summary>
         [HttpGet("GetReport")]
-        public async Task<ContentResult> GetReport(int id)
+        public async Task<string> GetReport(int id)
         {
             var res = await _reportService.GetReportByUserIdAsync(id);
-            var result = new ContentResult
-            {
-                Content = res.ToString(),
-                ContentType = "application/json"
-            };
-            return result;
+            return res;
         }
     }
 }

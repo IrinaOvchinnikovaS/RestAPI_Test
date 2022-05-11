@@ -1,6 +1,7 @@
 ﻿using RestAPI_Test.Models;
 using RestAPI_Test.Repositories.Interfaces;
 using RestAPI_Test.Services.Interfaces;
+using System.Text;
 
 namespace RestAPI_Test.Services
 {
@@ -42,22 +43,28 @@ namespace RestAPI_Test.Services
 
         private string createTextResult(User user, List<Todo> todosUser, List<Post>  postsUser)
         {
-            string todosText = string.Empty;
+            StringBuilder sb = new StringBuilder(textPattern);
+
+            StringBuilder todosText = new StringBuilder();
             foreach (Todo todos in todosUser)
             {
-                todosText += todos.Title + ",\n";
+                todosText.Append(todos.Title);
+                todosText.Append(",\n");
             }
-            todosText = todosText.Substring(0, todosText.Length - 2);
+            todosText.Remove(todosText.Length - 2, 2);
 
-            string postsText = string.Empty;
-            foreach(Post post in postsUser)
+            StringBuilder postsText = new StringBuilder();
+            foreach (Post post in postsUser)
             {
-                postsText += post.Title + ",\n";
+                postsText.Append(post.Title);
+                postsText.Append(",\n");
             }
-            postsText = postsText.Substring(0, postsText.Length - 2);
+            postsText.Remove(postsText.Length - 2, 2);
 
-            string result = string.Format(textPattern, user.Username, todosText, postsText);
-            return result;
+            sb.Replace("{0}", user.Name);
+            sb.Replace("{1}", todosText.ToString());
+            sb.Replace("{2}", postsText.ToString());
+            return sb.ToString();
         }
 
         private async void WriteToFile(string text)
