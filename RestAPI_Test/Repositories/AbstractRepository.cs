@@ -2,11 +2,16 @@
 {
     public class AbstractRepository
     {
+        private readonly HttpClient httpClient;
+
+        public AbstractRepository(HttpClient _httpClient)
+        {
+            httpClient = _httpClient;
+        }
         public async Task<string> GetAllFromSourceAsync(string url)
         {
             string result = string.Empty;
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url);
+            HttpResponseMessage response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
                 result = await response.Content.ReadAsStringAsync();
             return result;

@@ -6,6 +6,13 @@ namespace RestAPI_Test.Repositories
 {
     public class UserRepository : AbstractRepository, IUserRepository
     {
+        private readonly HttpClient httpClient;
+
+        public UserRepository(HttpClient _httpClient) : base (_httpClient)
+        {
+            httpClient = _httpClient;
+        }
+
         public async Task<List<User>> GetAllAsync()
         {
             var stringJson = await GetAllFromSourceAsync("http://jsonplaceholder.typicode.com/users");

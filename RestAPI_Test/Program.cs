@@ -14,8 +14,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "ToDo API",
-        Description = "An ASP.NET Core Web API for managing ToDo items",
+        Title = "RestAPI",
+        Description = "My first RestAPI programm",
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {
@@ -32,9 +32,10 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
-// Add services to the container.
 
 builder.Services.AddControllers();
+
+services.AddHttpClient();
 
 services.AddScoped<IReportService, ReportService>();
 services.AddScoped<IPostRepository, PostRepository>();

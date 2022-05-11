@@ -5,6 +5,13 @@ namespace RestAPI_Test.Repositories
 {
     public class PostRepository : AbstractRepository, IPostRepository
     {
+        private readonly HttpClient httpClient;
+
+        public PostRepository(HttpClient _httpClient) : base(_httpClient)
+        {
+            httpClient = _httpClient;
+        }
+
         public async Task<List<Post>> GetAllAsync()
         {
             var stringJson = await GetAllFromSourceAsync("http://jsonplaceholder.typicode.com/posts");
