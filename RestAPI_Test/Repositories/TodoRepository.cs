@@ -6,16 +6,16 @@ namespace RestAPI_Test.Repositories
 {
     public class TodoRepository : AbstractRepository, ITodoRepository
     {
-        private readonly HttpClient httpClient;
+        private IConfiguration config;
 
-        public TodoRepository(HttpClient _httpClient) : base(_httpClient)
+        public TodoRepository(HttpClient _httpClient, IConfiguration _config) : base(_httpClient)
         {
-            httpClient = _httpClient;
+            config = _config;
         }
 
         public async Task<List<Todo>> GetAllAsync()
         {
-            var stringJson = await GetAllFromSourceAsync("http://jsonplaceholder.typicode.com/todos");
+            var stringJson = await GetAllFromSourceAsync(config.GetValue<string>("TodoUrl"));
             List<Todo> todos = Todo.FromJson(stringJson);
             return todos;
         }
