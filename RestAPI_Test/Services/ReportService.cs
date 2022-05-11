@@ -23,7 +23,7 @@ namespace RestAPI_Test.Services
             this.userRepository = userRepository;
             this.config = config;
         }
-        public async Task<bool> GetReportByUserIdAsync(int id)
+        public async Task<string> GetReportByUserIdAsync(int id)
         {
             User user = await userRepository.GetByIdAsync(id);
             
@@ -35,9 +35,9 @@ namespace RestAPI_Test.Services
             {
                 string textResult = createTextResult(user, todosUser, postsUser);
                 WriteToFile(textResult);
-                return true;
+                return user.Name;
             }
-            return false;
+            return "User not found!";
         }
 
         private string createTextResult(User user, List<Todo> todosUser, List<Post>  postsUser)

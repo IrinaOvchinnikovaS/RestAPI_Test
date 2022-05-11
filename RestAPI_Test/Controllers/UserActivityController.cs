@@ -3,7 +3,8 @@ using RestAPI_Test.Services.Interfaces;
 
 namespace RestAPI_Test.Controllers
 {
-    public class UserActivityController : ControllerBase
+    [Route("[controller]")]
+    public class UserActivityController : Controller
     {
         private readonly ILogger<UserActivityController> _logger;
 
@@ -15,10 +16,13 @@ namespace RestAPI_Test.Controllers
             _reportService = reportService;
         }
 
-        [HttpGet]
-        public async Task<ContentResult> GetUserActivitySummaryAsync(int id)
+        /// <summary>
+        /// Forming report by user id
+        /// </summary>
+        [HttpGet("GetReport")]
+        public async Task<ContentResult> GetReport(int id)
         {
-            bool res = await _reportService.GetReportByUserIdAsync(id);
+            var res = await _reportService.GetReportByUserIdAsync(id);
             var result = new ContentResult
             {
                 Content = res.ToString(),

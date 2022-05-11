@@ -2,6 +2,6 @@
 {
     public interface IReportService
     {
-        Task<bool> GetReportByUserIdAsync(int id);
+        Task<string> GetReportByUserIdAsync(int id);
     }
 }
